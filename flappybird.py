@@ -37,6 +37,20 @@ def setup():
     window.on_key_release = on_key_release
     windown.on_mouse_press = on_mouse_press
     
+    arcade.run()
+    
+def update(delta_time):
+    
+    if jump_time is not 0:
+        player_pos_y += jump_speed
+        jump_time += 2
+        
+    if jump_time >= jump_time_cap:
+        jump_time = 0
+      
+    if jump_time is 0:
+        player_pos_y -= fall_speed
+    
 '''
 def jump():
     player_pos_y += jump_speed
