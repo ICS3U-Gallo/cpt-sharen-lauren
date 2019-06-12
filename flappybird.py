@@ -32,6 +32,11 @@ def setup():
     arcade.set_background_color(arcade.color.WHITE)
     arcade.schedule(update, 1/60)
 
+    window = arcade.get_window()
+    window.on_draw = on_draw
+    window.on_key_release = on_key_release
+    windown.on_mouse_press = on_mouse_press
+    
 '''
 def jump():
     player_pos_y += jump_speed
