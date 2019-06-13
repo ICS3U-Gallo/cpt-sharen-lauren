@@ -57,11 +57,15 @@ def update(delta_time):
         if list_of_pipes[pipe][0] <= -25:
             del list_of_pipes[pipe]
             list_of_pipes.append([WIDTH + 500, random.radiant(0, HEIGHT), False])
-        
+            
+#Moving all the pipes
     move_pipes()
-
-    
+        for pipe in list_of_pipes:
+            pipe[0] -= pipe_speed
+            
+#Checking all pipes for the addtion of points
     add_score()
+      
 
 def on_draw():
     arcade.start_render()
