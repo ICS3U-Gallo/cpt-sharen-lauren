@@ -63,5 +63,10 @@ move_pipes()
 
 add_score()
 
+def on_draw():
+    arcade.start_render()
+    # Draw in here
+    arcade.draw_ellipse_filled(pos_x, pos_y, 4, 2, arcade.color.RED)
+
 if __name__ == '__main__':
     setup()
