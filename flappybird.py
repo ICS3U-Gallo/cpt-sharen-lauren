@@ -62,3 +62,6 @@ for pipe in range(len(list_of_pipes)):
 move_pipes()
 
 add_score()
+
+if __name__ == '__main__':
+    setup()
