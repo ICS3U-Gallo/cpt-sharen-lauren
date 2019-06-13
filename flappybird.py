@@ -70,6 +70,8 @@ def on_draw():
     
     for pipe in list_of_pipes:
         arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.BLACK)
+        
+    arcade.draw_text(str(player_points), WIDTH/2, HEIGHT - 15, arcade.color.BLACK, 12)
 
 def on_key_press(key, modifiers):
     player_pos_y += jump_speed
@@ -81,6 +83,5 @@ def on_key_release(key, modifiers):
 def on_mouse_press(x, y, button, modifiers):
     pass
 
-  
 if __name__ == '__main__':
     setup()
