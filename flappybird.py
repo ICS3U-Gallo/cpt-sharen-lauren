@@ -11,7 +11,7 @@ fall_speed = 4
 
 key_pressed = False
 pos_x = 20
-pos_y = HEIGHT /2
+pos_y = HEIGHT / 2
 
 player_points = 0
 
