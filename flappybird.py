@@ -31,7 +31,7 @@ def setup():
     arcade.open_window(WIDTH, HEIGHT, "My Arcade Game") 
     arcade.set_background_color(arcade.color.WHITE)
     arcade.schedule(update, 1/60)
-
+    
     # Override arcade window methods
     window = arcade.get_window()
     window.on_draw = on_draw
@@ -51,9 +51,14 @@ def update(delta_time):
       
     if jump_time is 0:
         player_pos_y -= fall_speed
-        
+ 
+delete_pipe()
 # Deleting pipes that are out of range
 for pipe in range(len(list_of_pipes)):
     if list_of_pipes[pipe][0] <= -25:
         del list_of_pipes[pipe]
         list_of_pipes.append([WIDTH + 500, random.radiant(0, HEIGHT), False])
+        
+move_pipes()
+
+add_score()
