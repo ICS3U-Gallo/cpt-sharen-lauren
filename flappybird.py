@@ -68,5 +68,12 @@ def on_draw():
     # Draw in here
     arcade.draw_ellipse_filled(pos_x, pos_y, 4, 2, arcade.color.RED)
 
+def on_key_press(key, modifiers):
+    pass
+
+def on_mouse_press(x, y, button, modifiers):
+    pass
+
+  
 if __name__ == '__main__':
     setup()
