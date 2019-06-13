@@ -69,6 +69,10 @@ def on_draw():
     arcade.draw_ellipse_filled(pos_x, pos_y, 4, 2, arcade.color.RED)
 
 def on_key_press(key, modifiers):
+    player_pos_y += jump_speed
+    jump_time = 2
+    
+def on_key_release(key, modifiers):
     pass
 
 def on_mouse_press(x, y, button, modifiers):
