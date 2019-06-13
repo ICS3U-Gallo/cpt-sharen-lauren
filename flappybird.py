@@ -67,6 +67,9 @@ def on_draw():
     arcade.start_render()
     # Draw in here
     arcade.draw_ellipse_filled(pos_x, pos_y, 4, 2, arcade.color.RED)
+    
+    for pipe in list_of_pipes:
+        arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.BLACK)
 
 def on_key_press(key, modifiers):
     player_pos_y += jump_speed
