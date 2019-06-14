@@ -72,7 +72,6 @@ def update(delta_time):
             player_points += 1
             break
       
-
 def on_draw():
     arcade.start_render()
     # Draw in here
