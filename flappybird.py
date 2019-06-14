@@ -79,6 +79,7 @@ def on_draw():
     
     for pipe in list_of_pipes:
         arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.BLACK)
+      
         
     arcade.draw_text(str(player_points), WIDTH/2, HEIGHT - 15, arcade.color.BLACK, 12)
 
