@@ -25,7 +25,7 @@ list_of_pipes = []
 
 def setup():
     
-    for pipe_multiplyer in rnage(1, pipes_on_screen_numb):
+    for pipe_multiplyer in range(1, pipes_on_screen_numb):
             list_of_pipes.append([WIDTH + 10 * pipe_multiplyer,random.radiant(0, HEIGHT), False])
     
     arcade.open_window(WIDTH, HEIGHT, "My Arcade Game") 
