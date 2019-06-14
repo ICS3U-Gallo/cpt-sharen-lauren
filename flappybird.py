@@ -65,6 +65,12 @@ def update(delta_time):
             
 #Checking all pipes for the addtion of points
     add_score()
+    for pipe in range(len(list_of_pe=ipes)):
+        pos_x >= list_of_pipes[pipe] [0] + pipe_width and 
+        list_of_pipes[pipe][2] is False:
+            pipe[2] = True
+            player_points += 1
+            break
       
 
 def on_draw():
