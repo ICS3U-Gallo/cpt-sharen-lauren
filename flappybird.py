@@ -35,6 +35,7 @@ def setup():
     # Override arcade window methods
     window = arcade.get_window()
     window.on_draw = on_draw
+    window.on_key_press = on_key_press
     window.on_key_release = on_key_release
     windown.on_mouse_press = on_mouse_press
     
@@ -42,6 +43,7 @@ def setup():
     
 def update(delta_time):
     
+    # Manage the smooth jumping mechanism
     if jump_time is not 0:
         player_pos_y += jump_speed
         jump_time += 2
@@ -52,35 +54,32 @@ def update(delta_time):
     if jump_time is 0:
         player_pos_y -= fall_speed
  
-# Deleting pipes that are out of range
+    # Deleting pipes that are out of range
     for pipe in range(len(list_of_pipes)):
         if list_of_pipes[pipe][0] <= -25:
             del list_of_pipes[pipe]
             list_of_pipes.append([WIDTH + 500, random.radiant(0, HEIGHT), False])
             
-#Moving all the pipes
-    move_pipes()
+    #Moving all the pipes
         for pipe in list_of_pipes:
             pipe[0] -= pipe_speed
             
-#Checking all pipes for the addtion of points
-    add_score()
+    #Checking all pipes for the addtion of points
     for pipe in range(len(list_of_pe=ipes)):
-        pos_x >= list_of_pipes[pipe] [0] + pipe_width and 
-        list_of_pipes[pipe][2] is False:
+        pos_x >= list_of_pipes[pipe] [0] + pipe_width and list_of_pipes[pipe][2] is False:
             pipe[2] = True
             player_points += 1
             break
       
 def on_draw():
     arcade.start_render()
-    # Draw in here
+    # Draw in here...
     arcade.draw_ellipse_filled(pos_x, pos_y, 4, 2, arcade.color.RED)
     
     for pipe in list_of_pipes:
-        arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.BLACK)
-      
-        
+        arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.BLACK) #x,y,w,h
+        arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.BLACK)
+    
     arcade.draw_text(str(player_points), WIDTH/2, HEIGHT - 15, arcade.color.BLACK, 12)
 
 def on_key_press(key, modifiers):
