@@ -43,60 +43,89 @@ def setup():
     
     arcade.run()
     
+    
 def update(delta_time):
     
-    # Manage the smooth jumping mechanism
-    if jump_time is not 0:
-        player_pos_y += jump_speed
-        jump_time += 2
-        
-    if jump_time >= jump_time_cap:
-        jump_time = 0
-      
-    if jump_time is 0:
-        pos_y -= fall_speed
- 
-    # Deleting pipes that are out of range
-    for pipe in range(len(list_of_pipes)):
-        if list_of_pipes[pipe][0] <= -25:
-            del list_of_pipes[pipe]
-            list_of_pipes.append([WIDTH + 500, random.radiant(0, HEIGHT), False])
+    global screen
+    
+    global jump_speed
+    global jump_time
+    global jump_time_cap
+    
+    global player_points
+    global pos_y
+    global pos_x
+    
+    global list_of_pipes
+    global pipe_gap
+    global pipe_height
+    global pipe_speed
+    global pipe_width
+    global pipes_on_screen_numb
+    
+    if screen == "playing":
+        # Manage the smooth jumping mechanism
+        if jump_time is not 0:
+            player_pos_y += jump_speed
+            jump_time += 2
             
-    #Moving all the pipes
+        if jump_time >= jump_time_cap:
+            jump_time = 0
+            
+        if jump_time is 0:
+            pos_y -= fall_speed
+ 
+        # Deleting pipes that are out of range
+        for pipe in range(len(list_of_pipes)):
+            if list_of_pipes[pipe][0] <= -25:
+                del list_of_pipes[pipe]
+                list_of_pipes.append([WIDTH + 500, random.radiant(0, HEIGHT), False])
+            
+        #Moving all the pipes
         for pipe in list_of_pipes:
             pipe[0] -= pipe_speed
             
-    #Checking all pipes for the addtion of points
-    for pipe in range(len(list_of_pipes)):
-        if pos_x >= list_of_pipes[pipe] [0] + pipe_width:
-            if list_of_pipes [pipe] [2] is False:
-                list_of_pipes [pipe] [2] = True
-                player_points += 1
-                print("scored")
-            else:
+        #Checking all pipes for the addtion of points
+        for pipe in range(len(list_of_pipes)):
+            if pos_x >= list_of_pipes[pipe] [0] + pipe_width:
+                if list_of_pipes [pipe] [2] is False:
+                    list_of_pipes [pipe] [2] = True
+                    player_points += 1
+                    print("scored")
+                else:
                 
-                print('ded')
+                print('dead')
                 screen = "death"
                 
- if screen == "death":
-    print('ded')
+    if screen == "death":
+        print('dead')
             
 def on_draw():
+    
+    global screen
+    
     arcade.start_render()
     
+    if screen == "death":
+        arcade.draw_text(f"You got {str(player_points)}!", 30, 30, arcade.color.BLACK, 12)
+        
+    elif screen == "playing":
     
-    # Draw in here...
-    arcade.draw_ellipse_filled(pos_x, pos_y, 4, 2, arcade.color.RED)
+        # Draw in here...
+        arcade.draw_ellipse_filled(pos_x, pos_y, 4, 2, arcade.color.RED)
     
-    for pipe in list_of_pipes:
-        arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.BLACK) #x,y,w,h
-        arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.BLACK)
+        for pipe in list_of_pipes:
+            arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, 
+                                              arcade.color.BLACK) #x,y,w,h
+            arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.BLACK)
     
-    arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.BLACK, 12)
+        arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.BLACK, 12)
 
+        
+        
 def on_key_press(key, modifiers):
     global pos_y
-    gloabl jump_speed
+    global jump_speed
     global jump_time
     
     if arcade.key.SPACE == key:
@@ -107,8 +136,10 @@ def on_key_press(key, modifiers):
 def on_key_release(key, modifiers):
     pass
 
+
 def on_mouse_press(x, y, button, modifiers):
     pass
+
 
 if __name__ == '__main__':
     setup()
