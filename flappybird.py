@@ -39,7 +39,7 @@ def setup():
     window.on_draw = on_draw
     window.on_key_press = on_key_press
     window.on_key_release = on_key_release
-    windown.on_mouse_press = on_mouse_press
+    window.on_mouse_press = on_mouse_press
     
     arcade.run()
     
