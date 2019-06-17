@@ -37,7 +37,7 @@ screen = "playing"
 def setup():
     
     for pipe_multiplyer in range(1, pipes_on_screen_numb):
-            list_of_pipes.append([WIDTH + pipe_gap * pipe_multiplyer,random.radiant(100, HEIGHT -100), False])
+        list_of_pipes.append([WIDTH + pipe_gap * pipe_multiplyer, random.randint(100, HEIGHT -100), False])
     
     arcade.open_window(WIDTH, HEIGHT, "My Arcade Game") 
     arcade.set_background_color(arcade.color.WHITE)
@@ -108,8 +108,7 @@ def update(delta_time):
                     
         for pipe in range(len(list_of_pipes)):
             if pos_x >= list_of_pipes[pipe][0] and pos_x <= list_of_pipes[pipe][0] + pipe_width:
-                if pos_y >= list_of_pipes[pipe][1] + pipe_height
-                or pos_y <= list_of_pipes[pipe][1]:
+                if pos_y >= list_of_pipes[pipe][1] + pipe_height or pos_y <= list_of_pipes[pipe][1]:
                     screen = "death"
                     
         if pos_y < 0:
