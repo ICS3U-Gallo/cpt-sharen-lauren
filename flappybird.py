@@ -1,5 +1,5 @@
-import random
 import arcade
+import random
 import sys
 import os
 
@@ -107,8 +107,9 @@ def update(delta_time):
 
                     
         for pipe in range(len(list_of_pipes)):
-            if pos_x >= list_os_pipes[pipe][0] and pos_x <= list_of_pipes[pipe][0] + pipe_width:
-                if pos_y >= list_of_pipes[pipe][1]:
+            if pos_x >= list_of_pipes[pipe][0] and pos_x <= list_of_pipes[pipe][0] + pipe_width:
+                if pos_y >= list_of_pipes[pipe][1] + pipe_height
+                or pos_y <= list_of_pipes[pipe][1]:
                     screen = "death"
                     
         if pos_y < 0:
@@ -137,8 +138,7 @@ def on_draw():
         arcade.draw_ellipse_filled(pos_x, pos_y, 8, 5, arcade.color.RED)
     
         for pipe in list_of_pipes:
-            arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, 
-                                              arcade.color.BLACK) #x,y,w,h
+            arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.BLACK)
             arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.BLACK)
     
         arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.BLACK, 12)
