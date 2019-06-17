@@ -27,7 +27,7 @@ player_points = 0
 pipe_width = 45
 pipe_height = 60
 pipe_gap = 200
-pipe_speed = 8
+pipe_speed = 5
 pipes_on_screen_numb = 6
 
 list_of_pipes = []
@@ -39,7 +39,7 @@ def setup():
     for pipe_multiplyer in range(1, pipes_on_screen_numb):
         list_of_pipes.append([WIDTH + pipe_gap * pipe_multiplyer, random.randint(100, HEIGHT -100), False])
     
-    arcade.open_window(WIDTH, HEIGHT, "My Arcade Game") 
+    arcade.open_window(WIDTH, HEIGHT, "Flappy Bird") 
     arcade.set_background_color(arcade.color.LIGHT_BLUE)
     arcade.schedule(update, 1 / 100)
     
@@ -140,7 +140,7 @@ def on_draw():
             arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.GO_GREEN)
             arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.GO_GREEN)
     
-        arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.GO_GREEN, 12)
+        arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.BLACK, 12)
     
 def on_key_press(key, modifiers):
     global restart
