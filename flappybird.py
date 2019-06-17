@@ -3,6 +3,7 @@ import random
 import sys
 import os
 
+# Defining all the variables
 WIDTH = 350
 HEIGHT = 600
 
@@ -36,6 +37,7 @@ screen = "playing"
 
 def setup():
     
+    # Create all the pipes before the game actually starts
     for pipe_multiplyer in range(1, pipes_on_screen_numb):
         list_of_pipes.append([WIDTH + pipe_gap * pipe_multiplyer, random.randint(100, HEIGHT -100), False])
     
@@ -69,8 +71,8 @@ def update(delta_time):
     global pipe_width
     
     if screen == "playing":
-        # Manage the smooth jumping mechanism
         
+        # Manage the jumping and falling
         if jumping == True:
             y_velocity = 0
             y_velocity += jump_speed
@@ -84,7 +86,6 @@ def update(delta_time):
             if y_velocity <= max_fall_velocity:
                 y_velocity = y_velocity
              
-            
         pos_y += y_velocity        
  
         # Deleting pipes that are out of range
@@ -93,11 +94,11 @@ def update(delta_time):
                 del list_of_pipes[pipe]
                 list_of_pipes.append([WIDTH + 500, random.randint(0, HEIGHT), False])
             
-        #Moving all the pipes
+        # Moving all the pipes
         for pipe in list_of_pipes:
             pipe[0] -= pipe_speed
             
-        #Checking all pipes for the addtion of points
+        # Checking all pipes for the addtion of points
         for pipe in range(len(list_of_pipes)):
             if pos_x >= list_of_pipes[pipe][0] + pipe_width:
                 if list_of_pipes[pipe][2] is False:
@@ -105,18 +106,21 @@ def update(delta_time):
                     list_of_pipes[pipe][2] = True
                     player_points += 1
 
-                    
+        # Checking if the player hit a pipe
         for pipe in range(len(list_of_pipes)):
             if pos_x >= list_of_pipes[pipe][0] and pos_x <= list_of_pipes[pipe][0] + pipe_width:
                 if pos_y >= list_of_pipes[pipe][1] + pipe_height or pos_y <= list_of_pipes[pipe][1]:
                     screen = "death"
-                    
+        
+        # Checking if the player hit the ground
         if pos_y < 0:
             screen = "death"
-            
+        
+        # Capping the height of the player
         elif pos_y >= HEIGHT:
             pos_y = HEIGHT
-            
+    
+    # Restart the program if you are dead and the player hits enter
     if screen == "death":
         if restart is True:
             os.execl(sys.executable, sys.executable, *sys.argv)
@@ -133,9 +137,10 @@ def on_draw():
         
     elif screen == "playing":
     
-        # Draw in here...
+        # Draw the player
         arcade.draw_ellipse_filled(pos_x, pos_y, 8, 5, arcade.color.SCHOOL_BUS_YELLOW)
     
+        # Draw all the pipes
         for pipe in list_of_pipes:
             arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.GO_GREEN)
             arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.GO_GREEN)
