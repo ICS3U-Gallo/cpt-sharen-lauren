@@ -83,7 +83,8 @@ def update(delta_time):
             
             if y_velocity <= max_fall_velocity:
                 y_velocity = y_velocity
-                
+             
+            
         pos_y += y_velocity        
  
         # Deleting pipes that are out of range
@@ -104,6 +105,7 @@ def update(delta_time):
                     list_of_pipes[pipe][2] = True
                     player_points += 1
 
+                    
         for pipe in range(len(list_of_pipes)):
             if pos_x >= list_os_pipes[pipe][0] and pos_x <= list_of_pipes[pipe][0] + pipe_width:
                 if pos_y >= list_of_pipes[pipe][1]:
@@ -126,7 +128,8 @@ def on_draw():
     arcade.start_render()
     
     if screen == "death":
-        arcade.draw_text(f"You got {str(player_points)}!", 30, 30, arcade.color.BLACK, 12)
+        arcade.draw_text(f"You got {str(player_points)}!", 60, 60, arcade.color.BLACK, 12)
+        arcade.draw_text("Press enter to restart the game", 60, 30, arcade.color.BLACK, 12)
         
     elif screen == "playing":
     
@@ -139,9 +142,7 @@ def on_draw():
             arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.BLACK)
     
         arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.BLACK, 12)
-
-        
-        
+    
 def on_key_press(key, modifiers):
     global restart
     
@@ -149,10 +150,6 @@ def on_key_press(key, modifiers):
     global jump_speed
     global jumping
     
-    if arcade.key.SPACE == key:
-        jumping = True
-        jump_speed = 20
-
     if arcade.key.SPACE == key:
         jumping = True
         jump_speed = 20
