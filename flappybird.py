@@ -40,7 +40,7 @@ def setup():
         list_of_pipes.append([WIDTH + pipe_gap * pipe_multiplyer, random.randint(100, HEIGHT -100), False])
     
     arcade.open_window(WIDTH, HEIGHT, "My Arcade Game") 
-    arcade.set_background_color(arcade.color.WHITE)
+    arcade.set_background_color(arcade.color.LIGHT_BLUE)
     arcade.schedule(update, 1 / 100)
     
     # Override arcade window methods
@@ -134,13 +134,13 @@ def on_draw():
     elif screen == "playing":
     
         # Draw in here...
-        arcade.draw_ellipse_filled(pos_x, pos_y, 8, 5, arcade.color.RED)
+        arcade.draw_ellipse_filled(pos_x, pos_y, 8, 5, arcade.color.SCHOOL_BUS_YELLOW)
     
         for pipe in list_of_pipes:
-            arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.BLACK)
-            arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.BLACK)
+            arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.GREEN)
+            arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.GREEN)
     
-        arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.BLACK, 12)
+        arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.GREEN, 12)
     
 def on_key_press(key, modifiers):
     global restart
