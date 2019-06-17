@@ -4,10 +4,12 @@ import arcade
 WIDTH = 350
 HEIGHT = 600
 
-jump_time = 0
-jump_time_cap = 10
-jump_speed = 10
-fall_speed = 15
+jump_time = 5
+fall_speed = 3
+jumping = False
+y_velocity = 0
+max_jump_height = 20
+max_fall_velocity = 15
 
 key_pressed = False
 pos_x = 40
@@ -28,21 +30,18 @@ screen = "playing"
 def setup():
     
     for pipe_multiplyer in range(1, pipes_on_screen_numb):
-            list_of_pipes.append([WIDTH + 10 * pipe_multiplyer,random.radiant(0, HEIGHT), False])
+            list_of_pipes.append([WIDTH + pipe_gap * pipe_multiplyer,random.radiant(100, HEIGHT -100), False])
     
     arcade.open_window(WIDTH, HEIGHT, "My Arcade Game") 
     arcade.set_background_color(arcade.color.WHITE)
-    arcade.schedule(update, 1/100)
+    arcade.schedule(update, 1 / 100)
     
     # Override arcade window methods
     window = arcade.get_window()
     window.on_draw = on_draw
     window.on_key_press = on_key_press
-    window.on_key_release = on_key_release
-    window.on_mouse_press = on_mouse_press
     
     arcade.run()
-    
     
 def update(delta_time):
     
@@ -65,15 +64,21 @@ def update(delta_time):
     
     if screen == "playing":
         # Manage the smooth jumping mechanism
-        if jump_time is not 0:
-            player_pos_y += jump_speed
-            jump_time += 2
+        
+        if jumping == True:
+            y_velocity = 0
+            y_velocity += jump_speed
             
-        if jump_time >= jump_time_cap:
-            jump_time = 0
+            if y_velocity >= max_fall_velocity:
+                jumping = False
             
-        if jump_time is 0:
-            pos_y -= fall_speed
+        else: 
+            y_velocity -= fall_speed
+            
+            if y_velocity <= max_fall_velocity:
+                y_velocity = y_velocity
+                
+        pos_y += y_velocity        
  
         # Deleting pipes that are out of range
         for pipe in range(len(list_of_pipes)):
@@ -89,6 +94,7 @@ def update(delta_time):
         for pipe in range(len(list_of_pipes)):
             if pos_x >= list_of_pipes[pipe] [0] + pipe_width:
                 if list_of_pipes [pipe] [2] is False:
+                    
                     list_of_pipes [pipe] [2] = True
                     player_points += 1
                     print("scored")
