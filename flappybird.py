@@ -137,10 +137,10 @@ def on_draw():
         arcade.draw_ellipse_filled(pos_x, pos_y, 8, 5, arcade.color.SCHOOL_BUS_YELLOW)
     
         for pipe in list_of_pipes:
-            arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.GREEN)
-            arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.GREEN)
+            arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, arcade.color.GO_GREEN)
+            arcade.draw_xywh_rectangle_filled(pipe [0], 0, pipe_width, pipe[1], arcade.color.GO_GREEN)
     
-        arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.GREEN, 12)
+        arcade.draw_text(str(player_points), WIDTH / 2, HEIGHT - 15, arcade.color.GO_GREEN, 12)
     
 def on_key_press(key, modifiers):
     global restart
