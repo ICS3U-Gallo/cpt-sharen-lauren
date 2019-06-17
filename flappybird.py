@@ -1,13 +1,20 @@
 import random
 import arcade
+import sys
+import os
 
 WIDTH = 350
 HEIGHT = 600
 
-jump_time = 5
-fall_speed = 3
+restart = False
+
 jumping = False
+
+jump_speed = 5
+fall_speed = 3
+
 y_velocity = 0
+
 max_jump_height = 20
 max_fall_velocity = 15
 
@@ -19,7 +26,7 @@ player_points = 0
 
 pipe_width = 45
 pipe_height = 60
-pipe_gap = 150
+pipe_gap = 200
 pipe_speed = 8
 pipes_on_screen_numb = 6
 
@@ -48,19 +55,18 @@ def update(delta_time):
     global screen
     
     global jump_speed
-    global jump_time
-    global jump_time_cap
+    global fall_speed
+    global jumping
+    global y_velocity
+    global max_fall_velocity
     
     global player_points
     global pos_y
     global pos_x
     
     global list_of_pipes
-    global pipe_gap
-    global pipe_height
     global pipe_speed
     global pipe_width
-    global pipes_on_screen_numb
     
     if screen == "playing":
         # Manage the smooth jumping mechanism
@@ -92,19 +98,26 @@ def update(delta_time):
             
         #Checking all pipes for the addtion of points
         for pipe in range(len(list_of_pipes)):
-            if pos_x >= list_of_pipes[pipe] [0] + pipe_width:
-                if list_of_pipes [pipe] [2] is False:
+            if pos_x >= list_of_pipes[pipe][0] + pipe_width:
+                if list_of_pipes[pipe][2] is False:
                     
-                    list_of_pipes [pipe] [2] = True
+                    list_of_pipes[pipe][2] = True
                     player_points += 1
-                    print("scored")
-                else:
-                
-                print('dead')
-                screen = "death"
-                
+
+        for pipe in range(len(list_of_pipes)):
+            if pos_x >= list_os_pipes[pipe][0] and pos_x <= list_of_pipes[pipe][0] + pipe_width:
+                if pos_y >= list_of_pipes[pipe][1]:
+                    screen = "death"
+                    
+        if pos_y < 0:
+            screen = "death"
+            
+        elif pos_y >= HEIGHT:
+            pos_y = HEIGHT
+            
     if screen == "death":
-        print('dead')
+        if restart is True:
+            os.execl(sys.executable, sys.executable, *sys.argv)
             
 def on_draw():
     
@@ -118,7 +131,7 @@ def on_draw():
     elif screen == "playing":
     
         # Draw in here...
-        arcade.draw_ellipse_filled(pos_x, pos_y, 4, 2, arcade.color.RED)
+        arcade.draw_ellipse_filled(pos_x, pos_y, 8, 5, arcade.color.RED)
     
         for pipe in list_of_pipes:
             arcade.draw_xywh_rectangle_filled(pipe[0], pipe[1] + pipe_height, pipe_width, HEIGHT, 
@@ -130,21 +143,22 @@ def on_draw():
         
         
 def on_key_press(key, modifiers):
+    global restart
+    
     global pos_y
     global jump_speed
-    global jump_time
+    global jumping
     
     if arcade.key.SPACE == key:
-        pos_y += jump_speed
-        jump_time = 2
+        jumping = True
+        jump_speed = 20
 
-    
-def on_key_release(key, modifiers):
-    pass
-
-
-def on_mouse_press(x, y, button, modifiers):
-    pass
+    if arcade.key.SPACE == key:
+        jumping = True
+        jump_speed = 20
+        
+    if arcade.key.ENTER == key:
+        restart = True
 
 
 if __name__ == '__main__':
