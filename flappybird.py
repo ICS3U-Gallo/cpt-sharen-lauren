@@ -91,7 +91,7 @@ def update(delta_time):
         for pipe in range(len(list_of_pipes)):
             if list_of_pipes[pipe][0] <= -25:
                 del list_of_pipes[pipe]
-                list_of_pipes.append([WIDTH + 500, random.randiant(0, HEIGHT), False])
+                list_of_pipes.append([WIDTH + 500, random.randint(0, HEIGHT), False])
             
         #Moving all the pipes
         for pipe in list_of_pipes:
